@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import Home from './components/home';
 import SignIn from './components/signin';
+import Quiz from './components/quiz'
 import * as ROUTES from './constants/routes';
 import { firebaseConfig } from './firebaseConfig';
 
@@ -18,6 +19,7 @@ function App() {
 				<Switch>
 					<Route exact path={ROUTES.LANDING} component={Home} />
 					<Route path={ROUTES.SIGN_IN} component={SignIn} />
+					<Route path = "/quiz" component={Quiz}></Route>
 					{/* <Route path={ROUTES.CONTACT} component={Contact} /> */}
 				</Switch>
 			</Router>
