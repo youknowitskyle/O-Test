@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import Home from './components/home';
 import SignIn from './components/signin';
+import Quiz from './components/quiz'
 import Results from './components/results';
 import AppNavbar from './components/AppNavbar';
 
@@ -15,6 +16,7 @@ require('firebase/auth');
 
 function App() {
 	return (
+
 		<div>
 			<AppNavbar />
 			<FirebaseAuthProvider {...firebaseConfig} firebase={firebase}>
@@ -23,11 +25,13 @@ function App() {
 						<Route exact path={ROUTES.LANDING} component={Home} />
 						<Route path={ROUTES.SIGN_IN} component={SignIn} />
 						<Route path={ROUTES.RESULTS} component={Results} />
+            <Route path = "/quiz" component={Quiz}></Route>
 						{/* <Route path={ROUTES.CONTACT} component={Contact} /> */}
 					</Switch>
 				</Router>
 			</FirebaseAuthProvider>
 		</div>
+
 	);
 }
 
