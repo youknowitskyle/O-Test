@@ -8,6 +8,7 @@ import SignIn from './components/signin';
 import * as ROUTES from './constants/routes';
 import { firebaseConfig } from './firebaseConfig';
 
+
 require('firebase/auth');
 
 function App() {
