@@ -9,17 +9,18 @@ import { FirebaseAuthConsumer } from '@react-firebase/auth';
 import firebase from 'firebase';
 
 function AppNavbar(props) {
+	console.log(props);
 	return (
 		<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-			<Navbar.Brand href="#home">Diagnosis Test</Navbar.Brand>
+			<Navbar.Brand href="/">Diagnosis Test</Navbar.Brand>
 			<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 			<Navbar.Collapse id="responsive-navbar-nav">
 				<Nav className="mr-auto">
-					<Nav.Link href="#features">Home</Nav.Link>
-					<Nav.Link href="#pricing">Contact</Nav.Link>
+					<Nav.Link href="/">Home</Nav.Link>
+					<Nav.Link href="/about-us">About Us</Nav.Link>
+					{props.isSignedIn && <Nav.Link href="/results">Results</Nav.Link>}
 				</Nav>
 				<Nav>
-					{console.log(props.isSignedIn)}
 					{props.isSignedIn === true ? (
 						<Nav.Link
 							onClick={() => {
@@ -30,9 +31,26 @@ function AppNavbar(props) {
 						</Nav.Link>
 					) : (
 						<Nav.Link
-							onClick={() => {
+							onClick={async () => {
 								const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-								firebase.auth().signInWithPopup(googleAuthProvider);
+								await firebase.auth().signInWithPopup(googleAuthProvider);
+
+								const uid = firebase.auth().currentUser.uid;
+								const name = firebase.auth().currentUser.displayName;
+								const email = firebase.auth().currentUser.email;
+								const ref = firebase.database().ref('users');
+
+								ref.once('value', (snapshot) => {
+									if (!snapshot.hasChild(uid)) {
+										firebase
+											.database()
+											.ref('users/' + uid)
+											.set({
+												name: name,
+												email: email,
+											});
+									}
+								});
 							}}
 						>
 							Login
