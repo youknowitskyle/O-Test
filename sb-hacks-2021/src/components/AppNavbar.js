@@ -30,7 +30,9 @@ function AppNavbar(props) {
                 firebase.app().auth().signOut();
               }}
             >
-              <button type="button" class="btn btn-outline-warning btn-lg">LOGOUT</button>
+              <button type="button" class="btn btn-outline-warning btn-lg">
+                LOGOUT
+              </button>
             </Nav.Link>
           ) : (
             <Nav.Link
@@ -56,7 +58,9 @@ function AppNavbar(props) {
                 });
               }}
             >
-              <button type="button" class="btn btn-outline-warning btn-lg">LOGIN</button>
+              <button type="button" class="btn btn-outline-warning btn-lg">
+                LOGIN
+              </button>
             </Nav.Link>
           )}
         </Nav>

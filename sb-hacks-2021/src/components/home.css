@@ -1,39 +1,49 @@
 .jumbo {
-    padding:25vh;
+  /* padding: 25vh; */
+}
+
+.row {
+  height: 100%;
+  flex-wrap: nowrap;
 }
 
 .background {
-    min-height: 100vh;
-    background-image: url("images/background.jpg");
-    background-size: cover !important;
-    background-position-y: 50%;
+  height: calc(100% - 80px);
+  background-image: url("images/background.jpg");
+  background-size: 100% !important;
+  /* background-position-y: 50%; */
 }
 
 .card {
-    /* Add shadows to create the "card" effect */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    background-color: rgba(255,255,255,0.3) !important;
-  }
-  
-  /* On mouse-over, add a deeper shadow */
-  .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  }
-  
-  /* Add some padding inside the card container */
-  .container {
-    padding: 100px;
-    text-align: center;
-  }
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+  padding: 100px;
+  text-align: center;
+}
 
 .title {
-    font-size: 100px;
-    color: black;
-    font-family: "Georgia"
+  font-size: 100px;
+  color: black;
+  font-family: "Georgia";
 }
 
 p {
-    font-size: 25px;
-    font-family: "Arial";
+  font-size: 20px;
+  font-family: "Arial";
 }
