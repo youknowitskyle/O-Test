@@ -12,10 +12,10 @@ import * as ROUTES from "./constants/routes";
 function App() {
   return (
 	<Router>
-			<Switch>
-				<Route exact path={ROUTES.LANDING} component={Home} />
-				<Route path={ROUTES.CONTACT} component={Contact} />
-			</Switch>
+		<Switch>
+			<Route exact path={ROUTES.LANDING} component={Home} />
+			{/* <Route path={ROUTES.CONTACT} component={Contact} /> */}
+		</Switch>
 	</Router>
   );
 }
