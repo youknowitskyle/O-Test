@@ -1,6 +1,6 @@
 [build]
   command = "CI= npm run build"
-  publish="sb-hacks-2021/sb-hacks-2021/build"
+  publish="build"
   base = "sb-hacks-2021"
   
   [[redirects]]
