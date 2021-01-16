@@ -1,0 +1,23 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/sb-hacks-2021/node_modules
+/sb-hacks-2021/.pnp
+/sb-hacks-2021/.pnp.js
+
+# testing
+/sb-hacks-2021/coverage
+
+# production
+/sb-hacks-2021/build
+
+# misc
+/sb-hacks-2021.DS_Store
+/sb-hacks-2021.env.local
+/sb-hacks-2021.env.development.local
+/sb-hacks-2021.env.test.local
+/sb-hacks-2021.env.production.local
+
+/sb-hacks-2021npm-debug.log*
+/sb-hacks-2021yarn-debug.log*
+/sb-hacks-2021yarn-error.log*
