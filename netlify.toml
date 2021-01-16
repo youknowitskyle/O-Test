@@ -1,7 +1,7 @@
 [build]
   command = "npm run build"
   publish="react/build"
-  base = "react"
+  base = "sb-hacks-2021"
   
   [[redirects]]
   from = "/*"
