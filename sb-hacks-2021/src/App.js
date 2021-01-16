@@ -1,5 +1,6 @@
 import Home from './components/home';
 import Contact from './components/contact';
+
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -14,7 +15,6 @@ function App() {
 	<Router>
 		<Switch>
 			<Route exact path={ROUTES.LANDING} component={Home} />
-			{/* <Route path={ROUTES.CONTACT} component={Contact} /> */}
 		</Switch>
 	</Router>
   );
