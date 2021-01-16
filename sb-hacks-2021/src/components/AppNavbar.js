@@ -12,7 +12,7 @@ import "./AppNavbar.css";
 
 function AppNavbar() {
   return (
-    <Navbar>
+    <Navbar bg="dark" variant="dark">
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
@@ -30,7 +30,7 @@ function AppNavbar() {
                         firebase.app().auth().signOut();
                       }}
                     >
-                      Logout
+                      <button type="button" class="btn btn-outline-warning btn-lg">LOGOUT</button>
                     </Nav.Link>
                   );
                 } else {
@@ -41,9 +41,7 @@ function AppNavbar() {
                         firebase.auth().signInWithPopup(googleAuthProvider);
                       }}
                     >
-                      <button type="button" class="btn btn-warning" size="lg" block>
-                        Login
-                      </button>
+                    <button type="button" class="btn btn-outline-warning btn-lg">LOGIN</button>
                     </Nav.Link>
                   );
                 }
