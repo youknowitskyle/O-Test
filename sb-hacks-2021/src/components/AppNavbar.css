@@ -1,0 +1,12 @@
+.navbar {
+    height: 100px;
+    background-color: rgba(0,0,0,0.5);
+  
+}
+.mr-auto {
+    font-size: 20px;
+}
+
+button {
+    font-size: 200px;
+}
