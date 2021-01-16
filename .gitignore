@@ -12,12 +12,14 @@
 /sb-hacks-2021/build
 
 # misc
-/sb-hacks-2021.DS_Store
-/sb-hacks-2021.env.local
-/sb-hacks-2021.env.development.local
-/sb-hacks-2021.env.test.local
-/sb-hacks-2021.env.production.local
+/sb-hacks-2021/.DS_Store
+/sb-hacks-2021/.env.local
+/sb-hacks-2021/.env.development.local
+/sb-hacks-2021/.env.test.local
+/sb-hacks-2021/.env.production.local
 
-/sb-hacks-2021npm-debug.log*
-/sb-hacks-2021yarn-debug.log*
-/sb-hacks-2021yarn-error.log*
+/sb-hacks-2021/npm-debug.log*
+/sb-hacks-2021/yarn-debug.log*
+/sb-hacks-2021/yarn-error.log*
+
+/sb-hacks-2021/.eslintcache
