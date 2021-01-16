@@ -7,13 +7,13 @@ import Image from "react-bootstrap/Image";
 import React from "react";
 import { FirebaseAuthConsumer } from "@react-firebase/auth";
 import firebase from "firebase";
+import "./AppNavbar.css";
+
 import * as ROUTES from "../constants/routes";
 
 function AppNavbar(props) {
-  console.log(props);
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Navbar.Brand href="/">Diagnosis Test</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
@@ -30,7 +30,7 @@ function AppNavbar(props) {
                 firebase.app().auth().signOut();
               }}
             >
-              Logout
+              <button type="button" class="btn btn-outline-warning btn-lg">LOGOUT</button>
             </Nav.Link>
           ) : (
             <Nav.Link
@@ -56,7 +56,7 @@ function AppNavbar(props) {
                 });
               }}
             >
-              Login
+              <button type="button" class="btn btn-outline-warning btn-lg">LOGIN</button>
             </Nav.Link>
           )}
         </Nav>
