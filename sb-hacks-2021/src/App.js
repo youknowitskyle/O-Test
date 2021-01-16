@@ -16,14 +16,33 @@ require('firebase/auth');
 function App() {
 	return (
 		<div>
-			<AppNavbar />
 			<FirebaseAuthProvider {...firebaseConfig} firebase={firebase}>
 				<Router>
 					<Switch>
-						<Route exact path={ROUTES.LANDING} component={Home} />
-						<Route path={ROUTES.SIGN_IN} component={SignIn} />
-						<Route path={ROUTES.RESULTS} component={Results} />
-						{/* <Route path={ROUTES.CONTACT} component={Contact} /> */}
+						<FirebaseAuthConsumer>
+							{({ user, isSignedIn }) => {
+								{
+									return (
+										<>
+											<AppNavbar isSignedIn={isSignedIn} />
+											<Route
+												exact
+												path={ROUTES.LANDING}
+												component={Home}
+												isSignedIn={isSignedIn}
+												user={user}
+											/>
+											<Route
+												path={ROUTES.RESULTS}
+												component={Results}
+												isSignedIn={isSignedIn}
+												user={user}
+											/>
+										</>
+									);
+								}
+							}}
+						</FirebaseAuthConsumer>
 					</Switch>
 				</Router>
 			</FirebaseAuthProvider>

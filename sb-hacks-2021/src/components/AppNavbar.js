@@ -8,7 +8,7 @@ import React from 'react';
 import { FirebaseAuthConsumer } from '@react-firebase/auth';
 import firebase from 'firebase';
 
-function AppNavbar() {
+function AppNavbar(props) {
 	return (
 		<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
 			<Navbar.Brand href="#home">Diagnosis Test</Navbar.Brand>
@@ -19,34 +19,25 @@ function AppNavbar() {
 					<Nav.Link href="#pricing">Contact</Nav.Link>
 				</Nav>
 				<Nav>
-					<FirebaseAuthConsumer>
-						{({ user, isSignedIn }) => {
-							{
-								if (isSignedIn === true) {
-									return (
-										<Nav.Link
-											onClick={() => {
-												firebase.app().auth().signOut();
-											}}
-										>
-											Logout
-										</Nav.Link>
-									);
-								} else {
-									return (
-										<Nav.Link
-											onClick={() => {
-												const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-												firebase.auth().signInWithPopup(googleAuthProvider);
-											}}
-										>
-											Login
-										</Nav.Link>
-									);
-								}
-							}
-						}}
-					</FirebaseAuthConsumer>
+					{console.log(props.isSignedIn)}
+					{props.isSignedIn === true ? (
+						<Nav.Link
+							onClick={() => {
+								firebase.app().auth().signOut();
+							}}
+						>
+							Logout
+						</Nav.Link>
+					) : (
+						<Nav.Link
+							onClick={() => {
+								const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+								firebase.auth().signInWithPopup(googleAuthProvider);
+							}}
+						>
+							Login
+						</Nav.Link>
+					)}
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>
