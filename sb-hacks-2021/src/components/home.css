@@ -1,0 +1,39 @@
+.jumbo {
+    padding:25vh;
+}
+
+.background {
+    min-height: 100vh;
+    background-image: url("images/background.jpg");
+    background-size: cover !important;
+    background-position-y: 50%;
+}
+
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    background-color: rgba(255,255,255,0.3) !important;
+  }
+  
+  /* On mouse-over, add a deeper shadow */
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+  /* Add some padding inside the card container */
+  .container {
+    padding: 100px;
+    text-align: center;
+  }
+
+.title {
+    font-size: 100px;
+    color: black;
+    font-family: "Georgia"
+}
+
+p {
+    font-size: 25px;
+    font-family: "Arial";
+}
