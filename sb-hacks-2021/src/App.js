@@ -8,6 +8,8 @@ import SignIn from './components/signin';
 import Quiz from './components/quiz'
 import Results from './components/results';
 import AppNavbar from './components/AppNavbar';
+import EmptyRoute from './components/empty';
+import About from './components/about';
 
 import * as ROUTES from './constants/routes';
 import { firebaseConfig } from './firebaseConfig';
@@ -18,16 +20,37 @@ function App() {
 	return (
 
 		<div>
-			<AppNavbar />
 			<FirebaseAuthProvider {...firebaseConfig} firebase={firebase}>
 				<Router>
-					<Switch>
-						<Route exact path={ROUTES.LANDING} component={Home} />
-						<Route path={ROUTES.SIGN_IN} component={SignIn} />
-						<Route path={ROUTES.RESULTS} component={Results} />
-            <Route path = "/quiz" component={Quiz}></Route>
-						{/* <Route path={ROUTES.CONTACT} component={Contact} /> */}
-					</Switch>
+					<FirebaseAuthConsumer>
+						{({ user, isSignedIn }) => {
+							{
+								return (
+									<>
+										<AppNavbar isSignedIn={isSignedIn} />
+										<Switch>
+											<Route
+												exact
+												path={ROUTES.LANDING}
+												render={(props) => (
+													<Home {...props} isSignedIn={isSignedIn} user={user} />
+												)}
+											/>
+											<Route
+												path={ROUTES.RESULTS}
+												render={(props) => (
+													<Results {...props} isSignedIn={isSignedIn} user={user} />
+												)}
+											/>
+											<Route path={ROUTES.ABOUT} component={About} />
+                      <Route path = "/quiz" component={Quiz}></Route>
+
+										</Switch>
+									</>
+								);
+							}
+						}}
+					</FirebaseAuthConsumer>
 				</Router>
 			</FirebaseAuthProvider>
 		</div>

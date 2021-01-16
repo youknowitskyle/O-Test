@@ -3,6 +3,8 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@material-ui/core": "^4.11.2",
+		"@material-ui/icons": "^4.11.2",
 		"@react-firebase/auth": "^0.2.10",
 		"@react-firebase/database": "^0.3.11",
 		"@testing-library/jest-dom": "^5.11.4",
@@ -10,6 +12,7 @@
 		"@testing-library/user-event": "^12.1.10",
 		"bootstrap": "^4.5.3",
 		"firebase": "^8.2.3",
+		"fontsource-roboto": "^4.0.0",
 		"jquery": "^3.5.1",
 		"popper.js": "^1.16.1",
 		"react": "^17.0.1",

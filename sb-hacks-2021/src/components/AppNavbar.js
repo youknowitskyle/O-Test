@@ -8,45 +8,54 @@ import React from 'react';
 import { FirebaseAuthConsumer } from '@react-firebase/auth';
 import firebase from 'firebase';
 
-function AppNavbar() {
+function AppNavbar(props) {
+	console.log(props);
 	return (
 		<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-			<Navbar.Brand href="#home">Diagnosis Test</Navbar.Brand>
+			<Navbar.Brand href="/">Diagnosis Test</Navbar.Brand>
 			<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 			<Navbar.Collapse id="responsive-navbar-nav">
 				<Nav className="mr-auto">
-					<Nav.Link href="#features">Home</Nav.Link>
-					<Nav.Link href="#pricing">Contact</Nav.Link>
+					<Nav.Link href="/">Home</Nav.Link>
+					<Nav.Link href="/about-us">About Us</Nav.Link>
+					{props.isSignedIn && <Nav.Link href="/results">Results</Nav.Link>}
 				</Nav>
 				<Nav>
-					<FirebaseAuthConsumer>
-						{({ user, isSignedIn }) => {
-							{
-								if (isSignedIn === true) {
-									return (
-										<Nav.Link
-											onClick={() => {
-												firebase.app().auth().signOut();
-											}}
-										>
-											Logout
-										</Nav.Link>
-									);
-								} else {
-									return (
-										<Nav.Link
-											onClick={() => {
-												const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-												firebase.auth().signInWithPopup(googleAuthProvider);
-											}}
-										>
-											Login
-										</Nav.Link>
-									);
-								}
-							}
-						}}
-					</FirebaseAuthConsumer>
+					{props.isSignedIn === true ? (
+						<Nav.Link
+							onClick={() => {
+								firebase.app().auth().signOut();
+							}}
+						>
+							Logout
+						</Nav.Link>
+					) : (
+						<Nav.Link
+							onClick={async () => {
+								const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+								await firebase.auth().signInWithPopup(googleAuthProvider);
+
+								const uid = firebase.auth().currentUser.uid;
+								const name = firebase.auth().currentUser.displayName;
+								const email = firebase.auth().currentUser.email;
+								const ref = firebase.database().ref('users');
+
+								ref.once('value', (snapshot) => {
+									if (!snapshot.hasChild(uid)) {
+										firebase
+											.database()
+											.ref('users/' + uid)
+											.set({
+												name: name,
+												email: email,
+											});
+									}
+								});
+							}}
+						>
+							Login
+						</Nav.Link>
+					)}
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>
