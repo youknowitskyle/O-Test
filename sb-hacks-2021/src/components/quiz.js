@@ -121,8 +121,8 @@ const Quiz = (props) => {
     const data = {
       gender: parseInt(sex),
       age: parseInt(age),
-      height: parseFloat(height / parseFloat(100)),
-      weight: parseFloat(weight / parseFloat(1000)),
+      height: parseFloat(height * parseFloat(0.0254)),
+      weight: parseFloat(weight * parseFloat(0.453592)),
       fcvc: parseInt(vegetables),
       ch2o: parseInt(water),
       faf: parseInt(physical),
@@ -131,6 +131,7 @@ const Quiz = (props) => {
       smoke: parseInt(smoke),
       calc: parseInt(alcohol),
     };
+    console.log(data)
 
     const requestOptions = {
       method: "POST",
@@ -217,7 +218,7 @@ const Quiz = (props) => {
                     </div>
                     <div className={classes.row}>
                       <TextField
-                        label="Height (cm)"
+                        label="Height (inches)"
                         variant="outlined"
                         type="number"
                         value={height}
@@ -232,7 +233,7 @@ const Quiz = (props) => {
                     </div>
                     <div className={classes.row}>
                       <TextField
-                        label="Weight (g)"
+                        label="Weight (lbs)"
                         variant="outlined"
                         type="number"
                         value={weight}
