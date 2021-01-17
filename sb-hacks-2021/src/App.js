@@ -52,7 +52,7 @@ function App() {
                         )}
                       />
                       <Route path={ROUTES.ABOUT} component={About} />
-                      <Route path="/quiz" component={Quiz}></Route>
+                      <Route path={ROUTES.QUIZ} component={Quiz}></Route>
                       <Route component={EmptyRoute} />
                     </Switch>
                   </>

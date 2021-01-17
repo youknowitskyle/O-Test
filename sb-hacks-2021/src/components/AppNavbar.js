@@ -14,10 +14,11 @@ import * as ROUTES from "../constants/routes";
 
 function AppNavbar(props) {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar className="hover" collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
+          <Navbar.Brand>The O-Test</Navbar.Brand>
           <Nav.Link href={ROUTES.LANDING}>Home</Nav.Link>
           <Nav.Link href={ROUTES.ABOUT}>About</Nav.Link>
           {props.isSignedIn && (
@@ -26,7 +27,7 @@ function AppNavbar(props) {
         </Nav>
         <Nav>
           {props.isSignedIn === true ? (
-            <Nav.Link
+            <Nav.Link href={ROUTES.LANDING}
               onClick={() => {
                 firebase.app().auth().signOut();
               }}

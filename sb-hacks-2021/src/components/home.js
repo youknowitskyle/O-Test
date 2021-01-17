@@ -1,4 +1,5 @@
 import React from "react";
+import * as ROUTES from "../constants/routes";
 import AppNavbar from "./AppNavbar";
 import { FirebaseAuthConsumer } from "@react-firebase/auth";
 import firebase from "firebase";
@@ -21,8 +22,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Home = () => {
+const Home = (props) => {
   const classes = useStyles();
+  const onTakeQuiz = async() => {
+	  if (props.isSignedIn) {
+		  props.history.push(ROUTES.QUIZ);
+	  }
+	  else {
+		const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+		await firebase.auth().signInWithPopup(googleAuthProvider);
+
+		const uid = firebase.auth().currentUser.uid;
+		const name = firebase.auth().currentUser.displayName;
+		const email = firebase.auth().currentUser.email;
+		const ref = firebase.database().ref("users");
+
+		ref.once("value", (snapshot) => {
+		  if (!snapshot.hasChild(uid)) {
+			firebase
+			  .database()
+			  .ref("users/" + uid)
+			  .set({
+				name: name,
+				email: email,
+			  });
+		  }
+		});
+		props.history.push(ROUTES.QUIZ);
+	  }
+  }
   return (
     <div className="container-fluid background">
       <div className="row row-container">
@@ -37,7 +65,7 @@ const Home = () => {
                 is over 40 percent. Take this quiz to find out where you land on
                 the spectrum and get tips on preventive actions.{" "}
               </p>
-              <button type="button" class="btn btn-warning btn-lg">
+              <button type="button" class="btn btn-warning btn-lg" onClick={onTakeQuiz}>
                 TAKE QUIZ
               </button>
             </div>
