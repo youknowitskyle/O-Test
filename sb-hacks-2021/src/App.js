@@ -28,7 +28,7 @@ function App() {
               {
                 return (
                   <>
-                    <AppNavbar isSignedIn={isSignedIn} />
+                    <AppNavbar isSignedIn={isSignedIn} user={user} />
                     <Switch>
                       <Route
                         exact

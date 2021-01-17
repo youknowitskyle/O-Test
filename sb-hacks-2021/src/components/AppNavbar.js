@@ -8,6 +8,8 @@ import React from "react";
 import { FirebaseAuthConsumer } from "@react-firebase/auth";
 import firebase from "firebase";
 
+import "./AppNavbar.css"
+
 import * as ROUTES from "../constants/routes";
 
 function AppNavbar(props) {
@@ -29,9 +31,12 @@ function AppNavbar(props) {
                 firebase.app().auth().signOut();
               }}
             >
-              <button type="button" class="btn btn-outline-warning btn-sm">
-                LOGOUT
-              </button>
+              <div>
+                <Navbar.Text className="text">Hi, {props.user.displayName}</Navbar.Text>
+                <button type="button" class="btn btn-outline-warning btn-sm">
+                  LOGOUT
+                </button>
+              </div>
             </Nav.Link>
           ) : (
             <Nav.Link
