@@ -1,3 +1,6 @@
 # requirements.txt
 flask
 flask_cors
+numpy
+pandas
+sklearn
