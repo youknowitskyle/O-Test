@@ -8,13 +8,19 @@ import React from "react";
 import { FirebaseAuthConsumer } from "@react-firebase/auth";
 import firebase from "firebase";
 
-import "./AppNavbar.css"
+import "./AppNavbar.css";
 
 import * as ROUTES from "../constants/routes";
 
 function AppNavbar(props) {
   return (
-    <Navbar className="hover" collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar
+      className="hover"
+      collapseOnSelect
+      expand="lg"
+      bg="dark"
+      variant="dark"
+    >
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
@@ -27,14 +33,19 @@ function AppNavbar(props) {
         </Nav>
         <Nav>
           {props.isSignedIn === true ? (
-            <Nav.Link href={ROUTES.LANDING}
-              onClick={() => {
-                firebase.app().auth().signOut();
-              }}
-            >
+            <Nav.Link>
               <div>
-                <Navbar.Text className="text">Hi, {props.user.displayName}</Navbar.Text>
-                <button type="button" class="btn btn-outline-warning btn-sm">
+                <Navbar.Text className="text">
+                  Hi, {props.user.displayName}!
+                </Navbar.Text>
+                <button
+                  type="button"
+                  class="btn btn-outline-warning btn-sm"
+                  onClick={() => {
+                    firebase.app().auth().signOut();
+                  }}
+                  href={ROUTES.LANDING}
+                >
                   LOGOUT
                 </button>
               </div>
