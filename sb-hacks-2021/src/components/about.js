@@ -6,7 +6,7 @@ import {
   Link,
 } from "@material-ui/core";
 
-import "./about.css"
+import "./about.css";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -30,16 +30,21 @@ const About = () => {
   return (
     <div className={classes.container}>
       <div className="bg ">
-        <Typography variant="h4" className="title-aboutUs">ABOUT THIS PROJECT</Typography>
+        <Typography variant="h4" className="title-aboutUs">
+          ABOUT THIS PROJECT
+        </Typography>
       </div>
       <div className={classes.textContainer}>
         <div>
-          <Typography variant="h5" style={{ display: "inline-block",fontWeight:"bold"}}>
+          <Typography
+            variant="h5"
+            style={{ display: "inline-block", fontWeight: "bold" }}
+          >
             Goal
           </Typography>
         </div>
         <div>
-          <Typography variant="body1" style={{ display: "inline-block"}}>
+          <Typography variant="body1" style={{ display: "inline-block" }}>
             Today, over 40% of Americans suffer from obesity. Obesity and
             excessive weight have been associated with severe risk of illness (
             <a href="https://www.cdc.gov/obesity/data/obesity-and-covid-19.html">
@@ -48,14 +53,17 @@ const About = () => {
             ). We find this problem especially relevant given the current
             COVID-19 pandemic, as many people have found themselves confined
             indoors with little to no exercise. By providing a predictive model
-            to guage the impact a person's lifestyle has on their health, we
+            to gauge the impact a person's lifestyle has on their health, we
             hope to aid in preventing health risks that arise from obesity and
             excessive weight.
           </Typography>
         </div>
         <br />
         <div>
-          <Typography variant="h5" style={{ display: "inline-block",fontWeight:"bold"}}>
+          <Typography
+            variant="h5"
+            style={{ display: "inline-block", fontWeight: "bold" }}
+          >
             Technology
           </Typography>
         </div>
