@@ -8,7 +8,7 @@
 }
 
 .background {
-  height: calc(100% - 80px);
+  height: calc(100% - 63px);
   background-image: url("images/background.jpg");
   background-size: 100% !important;
   /* background-position-y: 50%; */
@@ -33,17 +33,18 @@
 
 /* Add some padding inside the card container */
 .container {
-  padding: 100px;
+  padding: 50px;
   text-align: center;
 }
 
 .title {
-  font-size: 100px;
+  font-size: 50px;
   color: black;
   font-family: "Georgia";
 }
 
 p {
-  font-size: 20px;
+  font-size: 15px;
+  padding: 20px;
   font-family: "Arial";
 }

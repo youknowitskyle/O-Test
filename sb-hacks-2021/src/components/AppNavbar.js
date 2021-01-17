@@ -7,7 +7,6 @@ import Image from "react-bootstrap/Image";
 import React from "react";
 import { FirebaseAuthConsumer } from "@react-firebase/auth";
 import firebase from "firebase";
-import "./AppNavbar.css";
 
 import * as ROUTES from "../constants/routes";
 
@@ -30,7 +29,7 @@ function AppNavbar(props) {
                 firebase.app().auth().signOut();
               }}
             >
-              <button type="button" class="btn btn-outline-warning btn-lg">
+              <button type="button" class="btn btn-outline-warning btn-sm">
                 LOGOUT
               </button>
             </Nav.Link>
@@ -58,7 +57,7 @@ function AppNavbar(props) {
                 });
               }}
             >
-              <button type="button" class="btn btn-outline-warning btn-lg">
+              <button type="button" class="btn btn-outline-warning btn-sm">
                 LOGIN
               </button>
             </Nav.Link>
