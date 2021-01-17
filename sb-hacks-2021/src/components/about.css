@@ -1,0 +1,13 @@
+.bg {
+    height: 100%;
+    background-image: url("images/back.jpg");
+    background-size: 100% !important;
+    padding: 180px;
+    background-position: center;
+}
+
+.title-aboutUs {
+    font-weight: 900;
+    font-family: "copperplate" !important;
+    color: white
+}
