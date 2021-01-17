@@ -1,332 +1,301 @@
 import React from "react";
 import axios from "axios";
 
+import { useEffect, useState } from "react";
+
 import "./quiz.css";
+import {
+  makeStyles,
+  TextField,
+  Button,
+  Typography,
+  Link,
+  Radio,
+  RadioGroup,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  InputLabel,
+  Select,
+  MenuItem,
+  Card,
+} from "@material-ui/core";
+import { FullscreenExit } from "@material-ui/icons";
 
-export default class Quiz extends React.Component {
-  constructor(props) {
-    super(props);
+const useStyles = makeStyles((theme) => ({
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+    display: "flex",
+  },
+  card: {
+    padding: 30,
+    boxShadow: "2px 5px 4px 5px #888888",
+    maxWidth: "1000px",
+    margin: 20,
+  },
+  row: {
+    marginTop: 20,
+  },
+  button: {
+    marginTop: 20,
+  },
+  cardContainer: {
+    display: "inline-block",
+    margin: "0 auto",
+    position: "relative",
+  },
+  section: {
+    marginLeft: 100,
+    marginRight: 100,
+    marginTop: 20,
+  },
+}));
 
-    window.addEventListener("load", () => {
-      const form = document.getElementById("question-form");
-      form.addEventListener("submit", (e) => {
-        //to prevent reload
-        e.preventDefault();
-        //creates a multipart/form-data object
-        let data = new FormData(form);
-        axios({
-          method: "post",
-          url: "/",
-          data: data,
-        })
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            throw err;
-          });
-      });
-    });
-  }
+const Quiz = () => {
+  const classes = useStyles();
+  const [sex, setSex] = useState("f");
+  const [age, setAge] = useState(0);
+  const [height, setHeight] = useState(0.0);
+  const [weight, setWeight] = useState(0.0);
+  const [family, setFamily] = useState(false);
+  const [highCaloricFood, setHighCaloricFood] = useState(false);
+  const [meals, setMeals] = useState(0);
+  const [betweenMeals, setBetweenMeals] = useState(0);
+  const [smoke, setSmoke] = useState(false);
+  const [water, setWater] = useState(0.0);
+  const [monitorCalories, setMonitorCalories] = useState(false);
+  const [workoutDays, setWorkoutDays] = useState(0);
+  const [hoursTech, setHoursTech] = useState(0);
 
-  render() {
-    return (
-      <div className="container">
-        <section class="container-fluid px-0 quiz overflow-hidden">
-          <div class="row align-items-center">
-            <div class="col-sm"></div>
-            <div class="col-sm">
-              <form id="question-form">
-                <div id="basic-info">
-                  <h2>
-                    <u>Information Form</u>
-                  </h2>
-                  <div>
-                    <div class="labels">
-                      <label for="#name" id="name-label">
-                        Sex given at birth:
-                      </label>
-                      <input
-                        value="yes"
-                        class="radio-input"
-                        type="radio"
-                        id="yes"
-                        name="yes-no"
-                        checked
-                      />
-                      <label class="radio-label" for="yes">
-                        Male
-                      </label>
-                      <input
-                        value="no"
-                        class="radio-input"
-                        type="radio"
-                        id="no"
-                        name="yes-no"
-                      />
-                      <label class="radio-label" for="no">
-                        Female
-                      </label>
+  return (
+    <div className={classes.container}>
+      <div className={classes.cardContainer}>
+        <Card raised="true" variant="outlined" className={classes.card}>
+          <section
+            class="container-fluid px-0 quiz overflow-hidden"
+            className={classes.section}
+          >
+            <div class="row">
+              <div class="col-sm">
+                <form id="question-form">
+                  <div id="basic-info">
+                    <h2>
+                      <u>Information Form</u>
+                    </h2>
+                    <div className={classes.row}>
+                      <FormLabel component="legend">Sex:</FormLabel>
+                      <RadioGroup aria-label="gender" name="gender1" required>
+                        <FormControlLabel
+                          value="female"
+                          control={<Radio />}
+                          label="Female"
+                        />
+                        <FormControlLabel
+                          value="male"
+                          control={<Radio />}
+                          label="Male"
+                        />
+                      </RadioGroup>
                     </div>
-                  </div>
-                  <div>
-                    <div class="labels">
-                      <label for="#number" id="number-label">
-                        Age:
-                      </label>
-                      <input
+                    <div className={classes.row}>
+                      <TextField
+                        label="Age"
+                        variant="outlined"
                         type="number"
-                        id="number"
-                        placeholder=""
-                        min="0"
+                        InputProps={{
+                          inputProps: {
+                            min: 0,
+                          },
+                        }}
                         required
                       />
                     </div>
-                  </div>
-                  <div>
-                    <div class="col-sm">
-                      <div class="labels">
-                        <label for="#number" id="number-label">
-                          Height in Meters:
-                        </label>
-                        <input
-                          type="number"
-                          id="number"
-                          placeholder=""
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div class="col-sm">
-                      <div class="labels">
-                        <label for="#number" id="number-label">
-                          Weight in Kilograms:
-                        </label>
-                        <input
-                          type="number"
-                          id="number"
-                          placeholder=""
-                          required
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="labels">
-                    <div>
-                      <label for="#familyWeight" id="family-label">
-                        Has a family member suffered or suffers from being
-                        overweight?
-                      </label>
-                    </div>
-                    <div>
-                      <input
-                        value="yes"
-                        class="radio-input"
-                        type="radio"
-                        name="fam"
-                        checked
+                    <div className={classes.row}>
+                      <TextField
+                        label="Height (m)"
+                        variant="outlined"
+                        type="number"
+                        InputProps={{
+                          inputProps: {
+                            min: 0,
+                          },
+                        }}
+                        required
                       />
-                      <label class="radio-label" for="yes">
-                        Yes
-                      </label>
-                      <input
-                        value="no"
-                        class="radio-input"
-                        type="radio"
-                        name="fam"
-                      />
-                      <label class="radio-label" for="no">
-                        No
-                      </label>
                     </div>
-                  </div>
-                  <div class="labels">
-                    <div>
-                      <label for="#calories" id="calorie-label">
+                    <div className={classes.row}>
+                      <TextField
+                        label="Weight (kg)"
+                        variant="outlined"
+                        type="number"
+                        InputProps={{
+                          inputProps: {
+                            min: 0,
+                          },
+                        }}
+                        required
+                      />
+                    </div>
+                    <div className={classes.row}>
+                      <FormLabel component="legend">
+                        Has a family member suffered from being overweight?
+                      </FormLabel>
+                      <RadioGroup aria-label="gender" name="gender1" required>
+                        <FormControlLabel
+                          value="female"
+                          control={<Radio />}
+                          label="Yes"
+                        />
+                        <FormControlLabel
+                          value="male"
+                          control={<Radio />}
+                          label="No"
+                        />
+                      </RadioGroup>
+                    </div>
+                    <div className={classes.row}>
+                      <FormLabel component="legend">
                         Do you eat high caloric food frequently?
-                      </label>
+                      </FormLabel>
+                      <RadioGroup aria-label="gender" name="gender1" required>
+                        <FormControlLabel
+                          value="female"
+                          control={<Radio />}
+                          label="Yes"
+                        />
+                        <FormControlLabel
+                          value="male"
+                          control={<Radio />}
+                          label="No"
+                        />
+                      </RadioGroup>
                     </div>
-                    <div>
-                      <input
-                        value="yes"
-                        class="radio-input"
-                        type="radio"
-                        name="calories"
-                        checked
-                      />
-                      <label class="radio-label" for="yes">
-                        Yes
-                      </label>
-                      <input
-                        value="no"
-                        class="radio-input"
-                        type="radio"
-                        name="calories"
-                      />
-                      <label class="radio-label" for="no">
-                        No
-                      </label>
+                    <div className={classes.row}>
+                      <InputLabel id="label">
+                        How many main meals do you have a day?
+                      </InputLabel>
+                      <Select labelId="label" id="select" value="1">
+                        <MenuItem value="1">1-2</MenuItem>
+                        <MenuItem value="2">3</MenuItem>
+                        <MenuItem value="3">4 or more</MenuItem>
+                      </Select>
                     </div>
-                  </div>
-                  <div>
-                    <div class="labels">
-                      <label>How many main meals do you have a day?</label>
-                      <select id="dropdown">
-                        <option value="automobile">Between one and two</option>
-                        <option value="motorbike">Three</option>
-                        <option value="bike">More than three</option>
-                      </select>
+                    <div className={classes.row}>
+                      <InputLabel id="label">
+                        Do you eat any food between meals?
+                      </InputLabel>
+                      <Select labelId="label" id="select" value="1">
+                        <MenuItem value="1">No</MenuItem>
+                        <MenuItem value="2">Sometimes</MenuItem>
+                        <MenuItem value="3">Frequently</MenuItem>
+                        <MenuItem value="4">Always</MenuItem>
+                      </Select>
                     </div>
-                  </div>
-
-                  <div class="labels">
-                    <div>
-                      <label>Do you eat any food between meals?</label>
+                    <div className={classes.row}>
+                      <FormLabel component="legend">Do you smoke?</FormLabel>
+                      <RadioGroup aria-label="gender" name="gender1" required>
+                        <FormControlLabel
+                          value="female"
+                          control={<Radio />}
+                          label="Yes"
+                        />
+                        <FormControlLabel
+                          value="male"
+                          control={<Radio />}
+                          label="No"
+                        />
+                      </RadioGroup>
                     </div>
-                    <div>
-                      <select id="dropdown">
-                        <option value="automobile">No</option>
-                        <option value="motorbike">Sometimes</option>
-                        <option value="bike">Frequently</option>
-                        <option value="bike">Always</option>
-                      </select>
+                    <div className={classes.row}>
+                      <InputLabel id="label">
+                        How much water do you drink daily?
+                      </InputLabel>
+                      <Select labelId="label" id="select" value="1">
+                        <MenuItem value="1">Less than a liter</MenuItem>
+                        <MenuItem value="2">Between 1 and 2 liters</MenuItem>
+                        <MenuItem value="3">More than 2 liters</MenuItem>
+                      </Select>
                     </div>
-                  </div>
-                  <div class="labels">
-                    <div>
-                      <label for="#smoke" id="calorie-label">
-                        Do you smoke?
-                      </label>
-                    </div>
-                    <div>
-                      <input
-                        value="yes"
-                        class="radio-input"
-                        type="radio"
-                        name="smoke"
-                        checked
-                      />
-                      <label class="radio-label" for="yes">
-                        Yes
-                      </label>
-                      <input
-                        value="no"
-                        class="radio-input"
-                        type="radio"
-                        name="smoke"
-                      />
-                      <label class="radio-label" for="no">
-                        No
-                      </label>
-                    </div>
-                  </div>
-                  <div class="labels">
-                    <div>
-                      <label>How much water do you drink daily?</label>
-                    </div>
-                    <div>
-                      <select id="dropdown">
-                        <option value="automobile">Less than a liter</option>
-                        <option value="motorbike">Between 1 and 2 L</option>
-                        <option value="bike">More than 2L</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="labels">
-                    <div>
-                      <label for="#monitorC" id="calorie-label">
+                    <div className={classes.row}>
+                      <FormLabel component="legend">
                         Do you monitor the calories you eat daily?
-                      </label>
+                      </FormLabel>
+                      <RadioGroup aria-label="gender" name="gender1" required>
+                        <FormControlLabel
+                          value="female"
+                          control={<Radio />}
+                          label="Yes"
+                        />
+                        <FormControlLabel
+                          value="male"
+                          control={<Radio />}
+                          label="No"
+                        />
+                      </RadioGroup>
                     </div>
-                    <div>
-                      <input
-                        value="yes"
-                        class="radio-input"
-                        type="radio"
-                        name="monitorC"
-                        checked
-                      />
-                      <label class="radio-label" for="yes">
-                        Yes
-                      </label>
-                      <input
-                        value="no"
-                        class="radio-input"
-                        type="radio"
-                        name="monitorC"
-                      />
-                      <label class="radio-label" for="no">
-                        No
-                      </label>
+                    <div className={classes.row}>
+                      <InputLabel id="label">
+                        How many days do you workout per week?
+                      </InputLabel>
+                      <Select labelId="label" id="select" value="1">
+                        <MenuItem value="1">Less than 1 day</MenuItem>
+                        <MenuItem value="2">1 or 2 days</MenuItem>
+                        <MenuItem value="3">2-4 days</MenuItem>
+                        <MenuItem value="4">More than 4 days</MenuItem>
+                      </Select>
                     </div>
-                  </div>
-                  <div class="labels">
-                    <div>
-                      <label>How often do you have physical activity?</label>
+                    <div className={classes.row}>
+                      <InputLabel id="label">
+                        How much time do you use technological devices per day?
+                      </InputLabel>
+                      <Select labelId="label" id="select" value="1">
+                        <MenuItem value="1">0-2 hours</MenuItem>
+                        <MenuItem value="2">3-5 hours</MenuItem>
+                        <MenuItem value="3">More than 5 hours</MenuItem>
+                      </Select>
                     </div>
-                    <div>
-                      <select id="dropdown">
-                        <option value="automobile">I do not have</option>
-                        <option value="motorbike">1 or 2 days</option>
-                        <option value="bike">2 or 4 days</option>
-                        <option value="bike">4 or 5 days</option>
-                      </select>
+                    <div className={classes.row}>
+                      <InputLabel id="label">
+                        How often do you drink alcohol?
+                      </InputLabel>
+                      <Select labelId="label" id="select" value="1">
+                        <MenuItem value="1">I do not</MenuItem>
+                        <MenuItem value="2">Sometimes</MenuItem>
+                        <MenuItem value="3">Frequently</MenuItem>
+                        <MenuItem value="4">Always</MenuItem>
+                      </Select>
                     </div>
-                  </div>
-                  <div class="labels">
-                    <div>
-                      <label>
-                        How much time do you use technological devices such as
-                        cell phone, videogames, television, computer and others?
-                      </label>
-                    </div>
-                    <div>
-                      <select id="dropdown">
-                        <option value="automobile">0-2 hours</option>
-                        <option value="motorbike">3-5 hours</option>
-                        <option value="bike">More than 5 hours</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="labels">
-                    <div>
-                      <label>How often do you drink alcohol?</label>
-                    </div>
-                    <div>
-                      <select id="dropdown">
-                        <option value="automobile">I do not.</option>
-                        <option value="motorbike">Sometimes</option>
-                        <option value="bike">Frequently</option>
-                        <option value="bike">Always</option>
-                      </select>
+                    <div className={classes.row}>
+                      <InputLabel id="label">
+                        What is your main form of transportation?
+                      </InputLabel>
+                      <Select labelId="label" id="select" value="1">
+                        <MenuItem value="1">Automobile</MenuItem>
+                        <MenuItem value="2">Motorbike</MenuItem>
+                        <MenuItem value="3">Bike</MenuItem>
+                        <MenuItem value="4">Public Transportation</MenuItem>
+                        <MenuItem value="5">Walking</MenuItem>
+                      </Select>
                     </div>
                   </div>
-
-                  <div class="labels">
-                    <div>
-                      <label>Main Transportation</label>
-                    </div>
-                    <div>
-                      <select id="dropdown">
-                        <option value="automobile">Automobile</option>
-                        <option value="motorbike">Motorbike</option>
-                        <option value="bike">Bike</option>
-                        <option value="public">Public Transportation</option>
-                        <option value="walking">Walking</option>
-                      </select>
-                    </div>
+                  <div className="but">
+                    <Button
+                      variant="outlined"
+                      type="submit"
+                      className={classes.button}
+                    >
+                      Submit
+                    </Button>
                   </div>
-                </div>
-                <div className="but">
-                    <button type="button" id="submit" class="btn btn-dark bu btn-large">Submit</button>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
-            <div class="col-sm"></div>
-          </div>
-        </section>
+          </section>
+        </Card>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default Quiz;
