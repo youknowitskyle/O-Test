@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import firebase from "firebase";
 
 import { useEffect, useState } from "react";
 
@@ -52,21 +53,103 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Quiz = () => {
+const Quiz = (props) => {
   const classes = useStyles();
-  const [sex, setSex] = useState("f");
+  const [sex, setSex] = useState(-1);
   const [age, setAge] = useState(0);
   const [height, setHeight] = useState(0.0);
-  const [weight, setWeight] = useState(0.0);
-  const [family, setFamily] = useState(false);
-  const [highCaloricFood, setHighCaloricFood] = useState(false);
-  const [meals, setMeals] = useState(0);
-  const [betweenMeals, setBetweenMeals] = useState(0);
-  const [smoke, setSmoke] = useState(false);
-  const [water, setWater] = useState(0.0);
-  const [monitorCalories, setMonitorCalories] = useState(false);
-  const [workoutDays, setWorkoutDays] = useState(0);
-  const [hoursTech, setHoursTech] = useState(0);
+  const [weight, setWeight] = useState(0);
+  const [vegetables, setVegetables] = useState(-1);
+  const [water, setWater] = useState(-1);
+  const [physical, setPhysical] = useState(-1);
+  const [betweenMeals, setBetweenMeals] = useState(-1);
+  const [family, setFamily] = useState(-1);
+  const [smoke, setSmoke] = useState(-1);
+  const [alcohol, setAlcohol] = useState(-1);
+  const [diagnosis, setDiagnosis] = useState("");
+
+  const handleSexChange = (event) => {
+    if (sex == 1) setSex(0);
+    else setSex(1);
+  };
+
+  const handleAgeChange = (event) => {
+    setAge(event.target.value);
+  };
+
+  const handleHeightChange = (event) => {
+    setHeight(event.target.value);
+  };
+
+  const handleWeightChange = (event) => {
+    setWeight(event.target.value);
+  };
+
+  const handleVegetableChange = (event) => {
+    setVegetables(event.target.value);
+  };
+
+  const handleWaterChange = (event) => {
+    setWater(event.target.value);
+  };
+
+  const handlePhysicalChange = (event) => {
+    setPhysical(event.target.value);
+  };
+
+  const handleBetweenChange = (event) => {
+    setBetweenMeals(event.target.value);
+  };
+
+  const handleFamilyChange = (event) => {
+    setFamily(event.target.value);
+  };
+
+  const handleSmokeChange = (event) => {
+    setSmoke(event.target.value);
+  };
+
+  const handleAlcoholChange = (event) => {
+    setAlcohol(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const data = {
+      gender: parseInt(sex),
+      age: parseInt(age),
+      height: parseInt(height),
+      weight: parseInt(weight),
+      fcvc: parseInt(vegetables),
+      ch2o: parseInt(water),
+      faf: parseInt(physical),
+      caec: parseInt(betweenMeals),
+      family: parseInt(family),
+      smoke: parseInt(smoke),
+      calc: parseInt(alcohol),
+    };
+
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    };
+    fetch("http://localhost:8080/predict", requestOptions).then((res) => {
+      res.json().then((data) => {
+        setDiagnosis(data.diagnosis);
+      });
+    });
+  };
+
+  useEffect(() => {
+    if (diagnosis != "") {
+      firebase
+        .database()
+        .ref("users/" + props.user.uid)
+        .update({ diagnosis: diagnosis });
+    }
+  }, [diagnosis]);
 
   return (
     <div className={classes.container}>
@@ -78,23 +161,31 @@ const Quiz = () => {
           >
             <div class="row">
               <div class="col-sm">
-                <form id="question-form">
+                <form id="question-form" onSubmit={handleSubmit}>
                   <div id="basic-info">
                     <h2>
                       <u>Information Form</u>
                     </h2>
                     <div className={classes.row}>
                       <FormLabel component="legend">Sex:</FormLabel>
-                      <RadioGroup aria-label="gender" name="gender1" required>
+                      <RadioGroup
+                        aria-label="gender"
+                        name="gender1"
+                        required
+                        value={sex}
+                        onChange={handleSexChange}
+                      >
                         <FormControlLabel
-                          value="female"
+                          value={1}
                           control={<Radio />}
                           label="Female"
+                          checked={sex == 1}
                         />
                         <FormControlLabel
-                          value="male"
+                          value={0}
                           control={<Radio />}
                           label="Male"
+                          checked={sex == 0}
                         />
                       </RadioGroup>
                     </div>
@@ -103,12 +194,14 @@ const Quiz = () => {
                         label="Age"
                         variant="outlined"
                         type="number"
+                        value={age}
                         InputProps={{
                           inputProps: {
                             min: 0,
                           },
                         }}
                         required
+                        onChange={handleAgeChange}
                       />
                     </div>
                     <div className={classes.row}>
@@ -116,12 +209,14 @@ const Quiz = () => {
                         label="Height (m)"
                         variant="outlined"
                         type="number"
+                        value={height}
                         InputProps={{
                           inputProps: {
                             min: 0,
                           },
                         }}
                         required
+                        onChange={handleHeightChange}
                       />
                     </div>
                     <div className={classes.row}>
@@ -129,153 +224,140 @@ const Quiz = () => {
                         label="Weight (kg)"
                         variant="outlined"
                         type="number"
+                        value={weight}
                         InputProps={{
                           inputProps: {
                             min: 0,
                           },
                         }}
                         required
+                        onChange={handleWeightChange}
                       />
                     </div>
                     <div className={classes.row}>
-                      <FormLabel component="legend">
-                        Has a family member suffered from being overweight?
-                      </FormLabel>
-                      <RadioGroup aria-label="gender" name="gender1" required>
-                        <FormControlLabel
-                          value="female"
-                          control={<Radio />}
-                          label="Yes"
-                        />
-                        <FormControlLabel
-                          value="male"
-                          control={<Radio />}
-                          label="No"
-                        />
-                      </RadioGroup>
-                    </div>
-                    <div className={classes.row}>
-                      <FormLabel component="legend">
-                        Do you eat high caloric food frequently?
-                      </FormLabel>
-                      <RadioGroup aria-label="gender" name="gender1" required>
-                        <FormControlLabel
-                          value="female"
-                          control={<Radio />}
-                          label="Yes"
-                        />
-                        <FormControlLabel
-                          value="male"
-                          control={<Radio />}
-                          label="No"
-                        />
-                      </RadioGroup>
+                      <InputLabel id="label">
+                        Do you usually eat vegetables in your meals?
+                      </InputLabel>
+                      <Select
+                        labelId="label"
+                        id="select"
+                        value={vegetables}
+                        onChange={handleVegetableChange}
+                      >
+                        <MenuItem value={0}>Never</MenuItem>
+                        <MenuItem value={1}>Sometimes</MenuItem>
+                        <MenuItem value={2}>Always</MenuItem>
+                      </Select>
                     </div>
                     <div className={classes.row}>
                       <InputLabel id="label">
-                        How many main meals do you have a day?
+                        How much water do you drink daily?
                       </InputLabel>
-                      <Select labelId="label" id="select" value="1">
-                        <MenuItem value="1">1-2</MenuItem>
-                        <MenuItem value="2">3</MenuItem>
-                        <MenuItem value="3">4 or more</MenuItem>
+                      <Select
+                        labelId="label"
+                        id="select"
+                        value={water}
+                        onChange={handleWaterChange}
+                      >
+                        <MenuItem value={0}>Less than a liter</MenuItem>
+                        <MenuItem value={1}>Between 1 and 2 liters</MenuItem>
+                        <MenuItem value={2}>More than 2 liters</MenuItem>
+                      </Select>
+                    </div>
+                    <div className={classes.row}>
+                      <InputLabel id="label">
+                        How many days do you workout per week?
+                      </InputLabel>
+                      <Select
+                        labelId="label"
+                        id="select"
+                        value={physical}
+                        onChange={handlePhysicalChange}
+                      >
+                        <MenuItem value={0}>Less than 1 day</MenuItem>
+                        <MenuItem value={1}>1 or 2 days</MenuItem>
+                        <MenuItem value={2}>2-4 days</MenuItem>
+                        <MenuItem value={3}>More than 4 days</MenuItem>
                       </Select>
                     </div>
                     <div className={classes.row}>
                       <InputLabel id="label">
                         Do you eat any food between meals?
                       </InputLabel>
-                      <Select labelId="label" id="select" value="1">
-                        <MenuItem value="1">No</MenuItem>
-                        <MenuItem value="2">Sometimes</MenuItem>
-                        <MenuItem value="3">Frequently</MenuItem>
-                        <MenuItem value="4">Always</MenuItem>
-                      </Select>
-                    </div>
-                    <div className={classes.row}>
-                      <FormLabel component="legend">Do you smoke?</FormLabel>
-                      <RadioGroup aria-label="gender" name="gender1" required>
-                        <FormControlLabel
-                          value="female"
-                          control={<Radio />}
-                          label="Yes"
-                        />
-                        <FormControlLabel
-                          value="male"
-                          control={<Radio />}
-                          label="No"
-                        />
-                      </RadioGroup>
-                    </div>
-                    <div className={classes.row}>
-                      <InputLabel id="label">
-                        How much water do you drink daily?
-                      </InputLabel>
-                      <Select labelId="label" id="select" value="1">
-                        <MenuItem value="1">Less than a liter</MenuItem>
-                        <MenuItem value="2">Between 1 and 2 liters</MenuItem>
-                        <MenuItem value="3">More than 2 liters</MenuItem>
+                      <Select
+                        labelId="label"
+                        id="select"
+                        value={betweenMeals}
+                        onChange={handleBetweenChange}
+                      >
+                        <MenuItem value={0}>No</MenuItem>
+                        <MenuItem value={1}>Sometimes</MenuItem>
+                        <MenuItem value={2}>Frequently</MenuItem>
+                        <MenuItem value={3}>Always</MenuItem>
                       </Select>
                     </div>
                     <div className={classes.row}>
                       <FormLabel component="legend">
-                        Do you monitor the calories you eat daily?
+                        Has a family member suffered from being overweight?
                       </FormLabel>
-                      <RadioGroup aria-label="gender" name="gender1" required>
+                      <RadioGroup
+                        aria-label="gender"
+                        name="gender1"
+                        required
+                        value={family}
+                        onChange={handleFamilyChange}
+                      >
                         <FormControlLabel
-                          value="female"
+                          value={1}
                           control={<Radio />}
                           label="Yes"
+                          checked={family == 1}
                         />
                         <FormControlLabel
-                          value="male"
+                          value={0}
                           control={<Radio />}
                           label="No"
+                          checked={family == 0}
                         />
                       </RadioGroup>
                     </div>
                     <div className={classes.row}>
-                      <InputLabel id="label">
-                        How many days do you workout per week?
-                      </InputLabel>
-                      <Select labelId="label" id="select" value="1">
-                        <MenuItem value="1">Less than 1 day</MenuItem>
-                        <MenuItem value="2">1 or 2 days</MenuItem>
-                        <MenuItem value="3">2-4 days</MenuItem>
-                        <MenuItem value="4">More than 4 days</MenuItem>
-                      </Select>
-                    </div>
-                    <div className={classes.row}>
-                      <InputLabel id="label">
-                        How much time do you use technological devices per day?
-                      </InputLabel>
-                      <Select labelId="label" id="select" value="1">
-                        <MenuItem value="1">0-2 hours</MenuItem>
-                        <MenuItem value="2">3-5 hours</MenuItem>
-                        <MenuItem value="3">More than 5 hours</MenuItem>
-                      </Select>
+                      <FormLabel component="legend">Do you smoke?</FormLabel>
+                      <RadioGroup
+                        aria-label="gender"
+                        name="gender1"
+                        required
+                        value={smoke}
+                        onChange={handleSmokeChange}
+                      >
+                        <FormControlLabel
+                          value={1}
+                          control={<Radio />}
+                          label="Yes"
+                          checked={smoke == 1}
+                        />
+                        <FormControlLabel
+                          value={0}
+                          control={<Radio />}
+                          label="No"
+                          checked={smoke == 0}
+                        />
+                      </RadioGroup>
                     </div>
                     <div className={classes.row}>
                       <InputLabel id="label">
                         How often do you drink alcohol?
                       </InputLabel>
-                      <Select labelId="label" id="select" value="1">
-                        <MenuItem value="1">I do not</MenuItem>
-                        <MenuItem value="2">Sometimes</MenuItem>
-                        <MenuItem value="3">Frequently</MenuItem>
-                        <MenuItem value="4">Always</MenuItem>
-                      </Select>
-                    </div>
-                    <div className={classes.row}>
-                      <InputLabel id="label">
-                        What is your main form of transportation?
-                      </InputLabel>
-                      <Select labelId="label" id="select" value="1">
-                        <MenuItem value="1">Automobile</MenuItem>
-                        <MenuItem value="2">Motorbike</MenuItem>
-                        <MenuItem value="3">Bike</MenuItem>
-                        <MenuItem value="4">Public Transportation</MenuItem>
-                        <MenuItem value="5">Walking</MenuItem>
+                      <Select
+                        labelId="label"
+                        id="select"
+                        value={alcohol}
+                        onChange={handleAlcoholChange}
+                      >
+                        <MenuItem value={0}>I do not</MenuItem>
+                        <MenuItem value={1}>Sometimes</MenuItem>
+                        <MenuItem value={2}>Frequently</MenuItem>
+                        <MenuItem value={3}>Always</MenuItem>
                       </Select>
                     </div>
                   </div>
