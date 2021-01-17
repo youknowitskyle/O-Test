@@ -7,7 +7,7 @@ import firebase from "firebase";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import Home from "./components/home";
-// import Quiz from './components/quiz';
+import Quiz from './components/quiz';
 import Results from "./components/results";
 import AppNavbar from "./components/AppNavbar";
 import EmptyRoute from "./components/empty";
@@ -28,7 +28,7 @@ function App() {
               {
                 return (
                   <>
-                    <AppNavbar isSignedIn={isSignedIn} />
+                    <AppNavbar isSignedIn={isSignedIn} user={user} />
                     <Switch>
                       <Route
                         exact
@@ -52,7 +52,7 @@ function App() {
                         )}
                       />
                       <Route path={ROUTES.ABOUT} component={About} />
-                      {/* <Route path="/quiz" component={Quiz}></Route> */}
+                      <Route path={ROUTES.QUIZ} component={Quiz}></Route>
                       <Route component={EmptyRoute} />
                     </Switch>
                   </>
