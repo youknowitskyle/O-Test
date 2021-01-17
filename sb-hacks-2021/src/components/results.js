@@ -41,8 +41,8 @@ const Results = (props) => {
         const ref = firebase.database().ref("users/" + user.uid);
 
         ref.on("value", (snapshot) => {
-          if (snapshot.val() && snapshot.val().results) {
-            setResults(snapshot.val().results);
+          if (snapshot.val() && snapshot.val().diagnosis) {
+            setResults(snapshot.val().diagnosis);
           }
         });
       } else {
@@ -72,7 +72,9 @@ const Results = (props) => {
         <br />
         {results ? (
           <div>
-            <Typography variant="h4" className="txt">Diagnosis: {results}</Typography>
+            <Typography variant="h4" className="txt">
+              Diagnosis: {results}
+            </Typography>
           </div>
         ) : (
           <Typography variant="h4" className="txt">
@@ -98,9 +100,12 @@ const Results = (props) => {
                       <div class="card-body">
                         <h5 class="card-title">How to Prevent Obesity</h5>
                         <p class="card-text">
-                        https://www.healthline.com/health/how-to-prevent-obesity
+                          https://www.healthline.com/health/how-to-prevent-obesity
                         </p>
-                        <a href="https://www.healthline.com/health/how-to-prevent-obesity" class="btn btn-warning">
+                        <a
+                          href="https://www.healthline.com/health/how-to-prevent-obesity"
+                          class="btn btn-warning"
+                        >
                           Healthline
                         </a>
                       </div>
@@ -109,11 +114,16 @@ const Results = (props) => {
                   <div class="col-sm-4">
                     <div class="card">
                       <div class="card-body">
-                        <h5 class="card-title">Best Exercises to Lose Weight</h5>
+                        <h5 class="card-title">
+                          Best Exercises to Lose Weight
+                        </h5>
                         <p class="card-text">
-                        https://www.verywellfit.com/best-workouts-if-youre-overweight-3495993
+                          https://www.verywellfit.com/best-workouts-if-youre-overweight-3495993
                         </p>
-                        <a href="https://www.verywellfit.com/best-workouts-if-youre-overweight-3495993" class="btn btn-warning">
+                        <a
+                          href="https://www.verywellfit.com/best-workouts-if-youre-overweight-3495993"
+                          class="btn btn-warning"
+                        >
                           VeryWellFit
                         </a>
                       </div>
@@ -124,9 +134,12 @@ const Results = (props) => {
                       <div class="card-body">
                         <h5 class="card-title">Overweight vs. Obesity</h5>
                         <p class="card-text">
-                        https://www.cdc.gov/obesity/adult/defining.html
+                          https://www.cdc.gov/obesity/adult/defining.html
                         </p>
-                        <a href="https://www.cdc.gov/obesity/adult/defining.html" class="btn btn-warning">
+                        <a
+                          href="https://www.cdc.gov/obesity/adult/defining.html"
+                          class="btn btn-warning"
+                        >
                           CDC
                         </a>
                       </div>
@@ -152,9 +165,12 @@ const Results = (props) => {
                       <div class="card-body">
                         <h5 class="card-title">Health Risks Due to Obesity</h5>
                         <p class="card-text">
-                        https://www.webmd.com/diet/obesity/obesity-health-risks
+                          https://www.webmd.com/diet/obesity/obesity-health-risks
                         </p>
-                        <a href="https://www.webmd.com/diet/obesity/obesity-health-risks" class="btn btn-warning">
+                        <a
+                          href="https://www.webmd.com/diet/obesity/obesity-health-risks"
+                          class="btn btn-warning"
+                        >
                           WebMD
                         </a>
                       </div>
@@ -165,9 +181,12 @@ const Results = (props) => {
                       <div class="card-body">
                         <h5 class="card-title">Tips to Lose Weight</h5>
                         <p class="card-text">
-                        https://www.webmd.com/diet/obesity/ss/slideshow-obesity-weight-loss-tips
+                          https://www.webmd.com/diet/obesity/ss/slideshow-obesity-weight-loss-tips
                         </p>
-                        <a href="https://www.webmd.com/diet/obesity/ss/slideshow-obesity-weight-loss-tips" class="btn btn-warning">
+                        <a
+                          href="https://www.webmd.com/diet/obesity/ss/slideshow-obesity-weight-loss-tips"
+                          class="btn btn-warning"
+                        >
                           WebMD
                         </a>
                       </div>
@@ -178,9 +197,12 @@ const Results = (props) => {
                       <div class="card-body">
                         <h5 class="card-title">Improve your Diet</h5>
                         <p class="card-text">
-                        https://www.nhs.uk/conditions/obesity/treatment
+                          https://www.nhs.uk/conditions/obesity/treatment
                         </p>
-                        <a href="https://www.nhs.uk/conditions/obesity/treatment/" class="btn btn-warning">
+                        <a
+                          href="https://www.nhs.uk/conditions/obesity/treatment/"
+                          class="btn btn-warning"
+                        >
                           NHS
                         </a>
                       </div>
@@ -196,11 +218,16 @@ const Results = (props) => {
                   <div class="col-sm-4">
                     <div class="card">
                       <div class="card-body">
-                        <h5 class="card-title">Healthy Approaches to Gain Weight</h5>
+                        <h5 class="card-title">
+                          Healthy Approaches to Gain Weight
+                        </h5>
                         <p class="card-text">
-                        https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating
+                          https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating
                         </p>
-                        <a href="https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating/expert-answers/underweight/faq-20058429" class="btn btn-warning">
+                        <a
+                          href="https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating/expert-answers/underweight/faq-20058429"
+                          class="btn btn-warning"
+                        >
                           MayoClinic
                         </a>
                       </div>
@@ -211,9 +238,12 @@ const Results = (props) => {
                       <div class="card-body">
                         <h5 class="card-title">Identifying Eating Disorder</h5>
                         <p class="card-text">
-                        https://www.nationaleatingdisorders.org/warning-signs-and-symptoms
+                          https://www.nationaleatingdisorders.org/warning-signs-and-symptoms
                         </p>
-                        <a href="https://www.nationaleatingdisorders.org/warning-signs-and-symptoms" class="btn btn-warning">
+                        <a
+                          href="https://www.nationaleatingdisorders.org/warning-signs-and-symptoms"
+                          class="btn btn-warning"
+                        >
                           NEDA
                         </a>
                       </div>
@@ -224,9 +254,12 @@ const Results = (props) => {
                       <div class="card-body">
                         <h5 class="card-title">Unintentional Weight Loss</h5>
                         <p class="card-text">
-                        https://www.nhs.uk/conditions/unintentional-weight-loss
+                          https://www.nhs.uk/conditions/unintentional-weight-loss
                         </p>
-                        <a href="https://www.nhs.uk/conditions/unintentional-weight-loss/" class="btn btn-warning">
+                        <a
+                          href="https://www.nhs.uk/conditions/unintentional-weight-loss/"
+                          class="btn btn-warning"
+                        >
                           NHS
                         </a>
                       </div>
@@ -244,9 +277,12 @@ const Results = (props) => {
                       <div class="card-body">
                         <h5 class="card-title">Tips for a Healthy Life</h5>
                         <p class="card-text">
-                        https://www.hsph.harvard.edu/obesity-prevention-source
+                          https://www.hsph.harvard.edu/obesity-prevention-source
                         </p>
-                        <a href="https://www.hsph.harvard.edu/obesity-prevention-source/diet-lifestyle-to-prevent-obesity/" class="btn btn-warning">
+                        <a
+                          href="https://www.hsph.harvard.edu/obesity-prevention-source/diet-lifestyle-to-prevent-obesity/"
+                          class="btn btn-warning"
+                        >
                           HSPH
                         </a>
                       </div>
@@ -255,11 +291,16 @@ const Results = (props) => {
                   <div class="col-sm-4">
                     <div class="card">
                       <div class="card-body">
-                        <h5 class="card-title">How to Stay Active During the Pandemic</h5>
+                        <h5 class="card-title">
+                          How to Stay Active During the Pandemic
+                        </h5>
                         <p class="card-text">
-                        https://www.medstarhealth.org/medstar-blog
+                          https://www.medstarhealth.org/medstar-blog
                         </p>
-                        <a href="https://www.medstarhealth.org/medstar-blog/8-tips-for-staying-active-during-the-covid-19-pandemic/" class="btn btn-warning">
+                        <a
+                          href="https://www.medstarhealth.org/medstar-blog/8-tips-for-staying-active-during-the-covid-19-pandemic/"
+                          class="btn btn-warning"
+                        >
                           MedStart
                         </a>
                       </div>
@@ -268,11 +309,16 @@ const Results = (props) => {
                   <div class="col-sm-4">
                     <div class="card">
                       <div class="card-body">
-                        <h5 class="card-title">Healthy and Delicious Recipes</h5>
+                        <h5 class="card-title">
+                          Healthy and Delicious Recipes
+                        </h5>
                         <p class="card-text">
-                        https://www.delish.com/cooking/recipe-ideas/g3733/healthy-dinner-recipes
+                          https://www.delish.com/cooking/recipe-ideas/g3733/healthy-dinner-recipes
                         </p>
-                        <a href="https://www.delish.com/cooking/recipe-ideas/g3733/healthy-dinner-recipes/" class="btn btn-warning">
+                        <a
+                          href="https://www.delish.com/cooking/recipe-ideas/g3733/healthy-dinner-recipes/"
+                          class="btn btn-warning"
+                        >
                           Delish
                         </a>
                       </div>

@@ -21,6 +21,8 @@ import {
   MenuItem,
   Card,
 } from "@material-ui/core";
+import * as ROUTES from "../constants/routes";
+
 import { FullscreenExit } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
@@ -135,21 +137,30 @@ const Quiz = (props) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     };
-    fetch("http://localhost:8080/predict", requestOptions).then((res) => {
-      res.json().then((data) => {
-        setDiagnosis(data.diagnosis);
-      });
-    });
+    fetch("https://todo-jx3gabef3q-uc.a.run.app/predict", requestOptions).then(
+      (res) => {
+        res.json().then((data) => {
+          console.log(data);
+          firebase
+            .database()
+            .ref("users/" + props.user.uid)
+            .update({ diagnosis: data });
+          props.history.push(ROUTES.RESULTS);
+        });
+      }
+    );
   };
 
-  useEffect(() => {
-    if (diagnosis != "") {
-      firebase
-        .database()
-        .ref("users/" + props.user.uid)
-        .update({ diagnosis: diagnosis });
-    }
-  }, [diagnosis]);
+  // useEffect(() => {
+  //   console.log(diagnosis);
+  //   if (diagnosis != "" && diagnosis) {
+  //     console.log(props);
+  //     firebase
+  //       .database()
+  //       .ref("users/" + props.user.uid)
+  //       .update({ diagnosis: diagnosis });
+  //   }
+  // }, [diagnosis]);
 
   return (
     <div className={classes.container}>
