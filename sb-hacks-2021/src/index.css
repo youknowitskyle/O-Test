@@ -24,7 +24,3 @@ body,
 body > #root > div {
   height: 100%;
 }
-
-body {
-  background: #b0cdeb !important;
-}

@@ -6,9 +6,10 @@ import {
   Link,
 } from "@material-ui/core";
 
+import "./about.css"
+
 const useStyles = makeStyles((theme) => ({
   container: {
-    padding: 30,
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
@@ -16,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
   textContainer: {
     maxWidth: "80%",
+    paddingTop: "30px",
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
@@ -27,14 +29,17 @@ const About = () => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
+      <div className="bg ">
+        <Typography variant="h4" className="title-aboutUs">ABOUT THIS PROJECT</Typography>
+      </div>
       <div className={classes.textContainer}>
         <div>
-          <Typography variant="h5" style={{ display: "inline-block" }}>
+          <Typography variant="h5" style={{ display: "inline-block",fontWeight:"bold"}}>
             Goal
           </Typography>
         </div>
         <div>
-          <Typography variant="body1" style={{ display: "inline-block" }}>
+          <Typography variant="body1" style={{ display: "inline-block"}}>
             Today, over 40% of Americans suffer from obesity. Obesity and
             excessive weight have been associated with severe risk of illness (
             <a href="https://www.cdc.gov/obesity/data/obesity-and-covid-19.html">
@@ -50,7 +55,7 @@ const About = () => {
         </div>
         <br />
         <div>
-          <Typography variant="h5" style={{ display: "inline-block" }}>
+          <Typography variant="h5" style={{ display: "inline-block",fontWeight:"bold"}}>
             Technology
           </Typography>
         </div>

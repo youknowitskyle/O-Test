@@ -39,7 +39,7 @@ export default class Quiz extends React.Component {
               <form id="question-form">
                 <div id="basic-info">
                   <h2>
-                    <u>Basic Information</u>
+                    <u>Information Form</u>
                   </h2>
                   <div>
                     <div class="labels">
