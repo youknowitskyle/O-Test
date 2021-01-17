@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
@@ -51,6 +52,6 @@ def all_books():
         response_object['books'] = BOOKS
     return jsonify(response_object)
 
-
+port = int(os.environ.get('PORT', 8080))
 if __name__ == '__main__':
-    app.run()
+    app.run(threaded=True, host='0.0.0.0', port=port)
