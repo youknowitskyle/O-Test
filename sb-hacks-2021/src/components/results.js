@@ -93,7 +93,6 @@ const Results = (props) => {
                 ) : (
                   <img className="scale" src={OWII}></img>
                 )}
-                <h1 className="res">Resources</h1>
                 <div class="row">
                   <div class="col-sm-4">
                     <div class="card">
@@ -158,7 +157,6 @@ const Results = (props) => {
                 ) : (
                   <img className="scale" src={OBIII}></img>
                 )}
-                <h1 className="res">Resources</h1>
                 <div class="row">
                   <div class="col-sm-4">
                     <div class="card">
@@ -213,7 +211,6 @@ const Results = (props) => {
             ) : results === "Insufficient_Weight" ? (
               <div>
                 <img className="scale" src={Insufficient}></img>
-                <h1 className="res">Resources</h1>
                 <div class="row">
                   <div class="col-sm-4">
                     <div class="card">
@@ -270,7 +267,6 @@ const Results = (props) => {
             ) : (
               <div>
                 <img className="scale" src={Normal}></img>
-                <h1 className="res">Resources</h1>
                 <div class="row">
                   <div class="col-sm-4">
                     <div class="card">

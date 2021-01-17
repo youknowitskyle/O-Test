@@ -1,18 +1,19 @@
 .resultCard {
-    background-color:rgb(168, 58, 58);
-    color: white;
-    padding:50px;
+  background-color: rgb(168, 58, 58);
+  color: white;
+  padding: 50px;
 }
 
 .scale {
-    padding-top: 20px;
+  padding-top: 20px;
+  margin-bottom: 50px;
 }
 
 .res {
-    padding-bottom: 25px;
-    font-family: 'Georgia' !important;
+  padding-bottom: 25px;
+  font-family: "Georgia" !important;
 }
 
 .txt {
-    font-family: 'Georgia' !important;
+  font-family: "Georgia" !important;
 }
