@@ -125,20 +125,20 @@ new_male_data =  [
         'CALC_score': 0
     }]
 
-
 DEBUG = True
 
 # instantiate the app
 app = Flask(__name__)
 app.config.from_object(__name__)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 # enable CORS
-CORS(app, resources={r'/*': {'origins': '*'}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # route
 @app.route('/predict', methods=['POST'])
 def predict():
-    response_object = {'status': 'success'}
+    response_object = {'status': 'success', 'Access-Control-Allow-Origin': '*'}
 
     post_data = request.get_json()
 
@@ -162,7 +162,10 @@ def predict():
         last_item = len(knn.predict(X_new_male)) - 1
         diagnosis = knn.predict(X_new_male)[last_item]
         print(diagnosis)
-        return jsonify(diagnosis)
+        response_object['diagnosis'] = diagnosis
+        response = jsonify(response_object)
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
     else:
         new_female_data[0]['Age'] = post_data.get('age')
         new_female_data[0]['Height'] = post_data.get('height')
@@ -183,7 +186,11 @@ def predict():
         last_item = len(knn.predict(X_new_female)) - 1
         diagnosis = knn.predict(X_new_female)[last_item]
         print(diagnosis)
-        return jsonify(diagnosis)
+        response_object['diagnosis'] = diagnosis
+        response = jsonify(response_object)
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+    return post_data
 
 # sanity check route
 @app.route('/ping', methods=['GET'])
@@ -194,16 +201,17 @@ def ping_pong():
 @app.route('/books', methods=['GET', 'POST'])
 def all_books():
     response_object = {'status': 'success'}
-    if request.method == 'POST':
-        post_data = request.get_json()
-        BOOKS.append({
-            'title': post_data.get('title'),
-            'author': post_data.get('author'),
-            'read': post_data.get('read')
-        })
-        response_object['message'] = 'Book added!'
-    else:
-        response_object['books'] = BOOKS
+    # if request.method == 'POST':
+    #     post_data = request.get_json()
+    #     BOOKS.append({
+    #         'title': post_data.get('title'),
+    #         'author': post_data.get('author'),
+    #         'read': post_data.get('read')
+    #     })
+    #     response_object['message'] = 'Book added!'
+    # else:
+    #     response_object['books'] = BOOKS
+    # return jsonify(response_object)
     return jsonify(response_object)
 
 port = int(os.environ.get('PORT', 8080))
