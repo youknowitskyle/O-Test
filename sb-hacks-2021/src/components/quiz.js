@@ -121,8 +121,8 @@ const Quiz = (props) => {
     const data = {
       gender: parseInt(sex),
       age: parseInt(age),
-      height: parseInt(height),
-      weight: parseInt(weight),
+      height: parseFloat(height / parseFloat(100)),
+      weight: parseFloat(weight / parseFloat(1000)),
       fcvc: parseInt(vegetables),
       ch2o: parseInt(water),
       faf: parseInt(physical),
@@ -217,7 +217,7 @@ const Quiz = (props) => {
                     </div>
                     <div className={classes.row}>
                       <TextField
-                        label="Height (m)"
+                        label="Height (cm)"
                         variant="outlined"
                         type="number"
                         value={height}
@@ -232,7 +232,7 @@ const Quiz = (props) => {
                     </div>
                     <div className={classes.row}>
                       <TextField
-                        label="Weight (kg)"
+                        label="Weight (g)"
                         variant="outlined"
                         type="number"
                         value={weight}
