@@ -1,6 +1,6 @@
 # O-Test
 
-We developed a predictive model to gauge the impact a person's lifestyle has on their health, with the goal of preventing health risks that arise from obesity. This project was submitted to SB Hacks VII and was judged top 5 out of over 250 participants. Please visit our [Devpost](https://devpost.com/software/o-test?ref_content=user-portfolio&ref_feature=in_progress) for more information.
+We developed a fullstack web app that uses a custom-engineered ML model, allowing users to predict their proclivity to develop obesity given their background and lifestyle. This project was submitted to SB Hacks VII and was judged top 5 out of over 250 participants. Please visit our [Devpost](https://devpost.com/software/o-test?ref_content=user-portfolio&ref_feature=in_progress) for more information.
 
 ## Goal
 Today, over 40% of Americans suffer from obesity. Obesity and excessive weight have been associated with severe risk of illness ([CDC](https://www.cdc.gov/obesity/data/obesity-and-covid-19.html)). We find this problem especially relevant given the current COVID-19 pandemic, as many people have found themselves confined indoors with little to no exercise. By providing a predictive model to gauge the impact a person's lifestyle has on their health, we hope to aid in preventing health risks that arise from obesity and excessive weight.
